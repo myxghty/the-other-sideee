@@ -1,0 +1,11 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pypdf>=4.0
+pytesseract>=0.3.10
+Pillow>=10.0
+PyJWT>=2.8
+# PostgreSQL (production). Not needed for local SQLite.
+psycopg[binary,pool]>=3.1
+# Tests and sample documents
+pytest>=8.0
+reportlab>=4.0

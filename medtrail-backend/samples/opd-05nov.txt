@@ -1,0 +1,10 @@
+Lakeside Clinic - OPD prescription
+05 Nov 2026 - Dr. N. Varma
+Pt: Arun Kumar - 58 M - MRN SYN-20481 (SYNTHETIC)
+Rx
+1) Tab Metformin 1000mg 1-0-1 A/F
+2) Tab Amlodipine 5mg 0-0-1
+3) Tab Atorvastatin 20mg 0-0-1
+4) Cap Vitamin D3 60000 IU once weekly x 8 weeks
+5) Tab Telma 40mg OD morning
+Review after 1 month
