@@ -52,7 +52,9 @@ export default function Layout({ active, children }) {
             onFocus={() => setBrandHover(true)}
             onBlur={() => setBrandHover(false)}
           >
-            <Logo />
+            <span style={{ display: 'inline-flex', zoom: 1 }}>
+              <Logo />
+            </span>
             <span className="brand-name">
               <span style={{ color: brandHover ? BRAND_BLUE : BRAND_WHITE, ...(brandHover ? NO_BOX : BOX), transition: 'color 0.15s, background 0.15s' }}>Med</span>
               <span style={{ color: brandHover ? BRAND_WHITE : BRAND_BLUE, ...(brandHover ? BOX : NO_BOX), transition: 'color 0.15s, background 0.15s' }}>Bridge</span>
