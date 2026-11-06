@@ -25,6 +25,7 @@ def med(generic, display, form, line, **f):
     return base
 
 
+
 def visit(vid, pid, d, facility, vtype, prescriber, title, lines, meds):
     strip = lambda s: re.sub(r"^\s*\d+[.)]\s*", "", s)  # noqa: E731
     for m in meds:

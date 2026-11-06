@@ -64,48 +64,62 @@ export default function PatientView() {
   const pendingCount = items.filter((i) => i.status === 'in_review').length;
 
   return (
-    <div className="phone" aria-label="Patient view">
-      <div className="phone-head">
-        <div className="row between">
-          <strong style={{ fontSize: 18 }}>MedBridge</strong>
+    <div className="stack" aria-label="Patient view" style={{ gap: 20 }}>
+      <header
+        className="row between"
+        style={{ alignItems: 'flex-end', flexWrap: 'wrap', gap: 12, background: '#1e3a8a', color: '#fff', padding: '20px 24px', borderRadius: 12 }}
+      >
+        <div>
+          <div style={{ color: '#d6e0f7', fontSize: 14 }}>Hello, {user.role === 'patient' ? user.name.split(' ')[0] : 'Arun'}</div>
+          <h1 style={{ fontSize: 28, fontWeight: 800, margin: '4px 0 0', color: '#fff' }}>Your medicines</h1>
+        </div>
+        <div className="row" style={{ gap: 8 }}>
+          {q.data && (
+            <>
+              <Badge tone="green">{items.length - pendingCount} confirmed</Badge>
+              <Badge tone="amber">{pendingCount} being reviewed</Badge>
+            </>
+          )}
           <span className="pill-synthetic">SYNTHETIC</span>
         </div>
-        <div style={{ color: '#d6e0f7', fontSize: 14 }}>Hello, {user.role === 'patient' ? user.name.split(' ')[0] : 'Arun'}</div>
-        <h1 style={{ fontSize: 24, fontWeight: 800 }}>Your medicines</h1>
-        <div style={{ color: '#d6e0f7', fontSize: 13 }}>
-          {q.data ? `${items.length - pendingCount} confirmed · ${pendingCount} being reviewed` : ' '}
-        </div>
-      </div>
-      <div className="phone-body">
-        <StaleNotice query={q} />
-        {q.isLoading && <Loading />}
-        {items.map((it) => (
-          <MedCard key={it.generic} item={it} />
-        ))}
+      </header>
 
-        <section className="medcard" aria-label="Handover">
-          <strong>Moving to another hospital or pharmacy?</strong>
-          <div className="small muted">
-            Show a handover code to authorised staff. It gives them your reconciled list and any open questions for 15 minutes, and every use is logged.
+      <div className="split">
+        <section className="primary stack" aria-label="Medicines" style={{ gap: 14 }}>
+          <StaleNotice query={q} />
+          {q.isLoading && <Loading />}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 14 }}>
+            {items.map((it) => (
+              <MedCard key={it.generic} item={it} />
+            ))}
           </div>
-          {code && left > 0 ? (
-            <>
-              <div className="codebox" aria-live="polite">
-                {code.code}
-              </div>
-              <div className="small muted" style={{ textAlign: 'center' }}>
-                Valid for {Math.floor(left / 60000)}:{String(Math.floor((left % 60000) / 1000)).padStart(2, '0')}
-              </div>
-            </>
-          ) : (
-            <Button variant="primary" pending={handover.pending} onClick={makeCode}>
-              {code ? 'Code expired: create a new one' : 'Create handover code'}
-            </Button>
-          )}
         </section>
-        <p className="small subtle" style={{ margin: 0 }}>
-          MedBridge shows what your prescribers wrote. It does not change doses or tell you to stop a medicine. Ask your doctor or pharmacist about any changes.
-        </p>
+
+        <aside className="secondary stack" style={{ gap: 14 }}>
+          <section className="card stack" aria-label="Handover" style={{ gap: 10 }}>
+            <strong style={{ fontSize: 17 }}>Moving to another hospital or pharmacy?</strong>
+            <div className="small muted">
+              Show a handover code to authorised staff. It gives them your reconciled list and any open questions for 15 minutes, and every use is logged.
+            </div>
+            {code && left > 0 ? (
+              <>
+                <div className="codebox" aria-live="polite">
+                  {code.code}
+                </div>
+                <div className="small muted" style={{ textAlign: 'center' }}>
+                  Valid for {Math.floor(left / 60000)}:{String(Math.floor((left % 60000) / 1000)).padStart(2, '0')}
+                </div>
+              </>
+            ) : (
+              <Button variant="primary" pending={handover.pending} onClick={makeCode}>
+                {code ? 'Code expired: create a new one' : 'Create handover code'}
+              </Button>
+            )}
+          </section>
+          <p className="small subtle" style={{ margin: 0 }}>
+            MedBridge shows what your prescribers wrote. It does not change doses or tell you to stop a medicine. Ask your doctor or pharmacist about any changes.
+          </p>
+        </aside>
       </div>
     </div>
   );

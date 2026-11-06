@@ -78,6 +78,10 @@ function UploadStatus({ u }) {
   );
 }
 
+const Req = () => (
+  <span aria-hidden="true" style={{ color: 'var(--red, #d92d20)', marginLeft: 2 }}>*</span>
+);
+
 export default function Upload() {
   const pid = PATIENT_ID;
   const load = useLoadLevel();
@@ -88,6 +92,7 @@ export default function Upload() {
   const [visitDate, setVisitDate] = useState('');
   const [error, setError] = useState('');
   const inputRef = useRef(null);
+  const ready = Boolean(file && visitDate && facility.trim());
 
   const list = useQuery(`uploads:${pid}`, () => api.uploads(pid), { staleTime: 2000 });
   const items = list.data?.items || [];
@@ -118,7 +123,7 @@ export default function Upload() {
 
   async function onSubmit(e) {
     e.preventDefault();
-    if (!file) return;
+    if (!ready) return;
     const meta = { docType, facility, visitDate };
     try {
       const r = await submit.mutate(`${file.name}:${file.size}:${file.lastModified}:${JSON.stringify(meta)}`, file, meta);
@@ -175,7 +180,7 @@ export default function Upload() {
 
         <div className="grid-2">
           <label className="field">
-            Document type *
+            <span>Document type <Req /></span>
             <select className="input" value={docType} onChange={(e) => setDocType(e.target.value)}>
               <option>Prescription</option>
               <option>Discharge summary</option>
@@ -183,17 +188,17 @@ export default function Upload() {
             </select>
           </label>
           <label className="field">
-            Visit date *
+            <span>Visit date <Req /></span>
             <input className="input" type="date" value={visitDate} onChange={(e) => setVisitDate(e.target.value)} />
           </label>
           <label className="field">
-            Facility *
+            <span>Facility <Req /></span>
             <input className="input" value={facility} onChange={(e) => setFacility(e.target.value)} placeholder="e.g. Green Valley Clinic" />
           </label>
         </div>
 
         <div className="row">
-          <Button type="submit" variant="primary" pending={submit.pending} disabled={!file}>
+          <Button type="submit" variant="primary" pending={submit.pending} disabled={!ready}>
             Upload document
           </Button>
         </div>
