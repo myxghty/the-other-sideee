@@ -175,7 +175,7 @@ export default function Upload() {
 
         <div className="grid-2">
           <label className="field">
-            Document type
+            Document type *
             <select className="input" value={docType} onChange={(e) => setDocType(e.target.value)}>
               <option>Prescription</option>
               <option>Discharge summary</option>
@@ -183,11 +183,11 @@ export default function Upload() {
             </select>
           </label>
           <label className="field">
-            Visit date
+            Visit date *
             <input className="input" type="date" value={visitDate} onChange={(e) => setVisitDate(e.target.value)} />
           </label>
           <label className="field">
-            Facility
+            Facility *
             <input className="input" value={facility} onChange={(e) => setFacility(e.target.value)} placeholder="e.g. Green Valley Clinic" />
           </label>
         </div>
@@ -196,7 +196,6 @@ export default function Upload() {
           <Button type="submit" variant="primary" pending={submit.pending} disabled={!file}>
             Upload document
           </Button>
-          <span className="small muted">Uploading the same file twice is safe: it is recognised and not duplicated.</span>
         </div>
       </form>
 

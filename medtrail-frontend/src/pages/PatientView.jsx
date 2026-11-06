@@ -67,7 +67,7 @@ export default function PatientView() {
     <div className="phone" aria-label="Patient view">
       <div className="phone-head">
         <div className="row between">
-          <strong style={{ fontSize: 18 }}>MedTrail</strong>
+          <strong style={{ fontSize: 18 }}>MedBridge</strong>
           <span className="pill-synthetic">SYNTHETIC</span>
         </div>
         <div style={{ color: '#d6e0f7', fontSize: 14 }}>Hello, {user.role === 'patient' ? user.name.split(' ')[0] : 'Arun'}</div>
@@ -104,7 +104,7 @@ export default function PatientView() {
           )}
         </section>
         <p className="small subtle" style={{ margin: 0 }}>
-          MedTrail shows what your prescribers wrote. It does not change doses or tell you to stop a medicine. Ask your doctor or pharmacist about any changes.
+          MedBridge shows what your prescribers wrote. It does not change doses or tell you to stop a medicine. Ask your doctor or pharmacist about any changes.
         </p>
       </div>
     </div>

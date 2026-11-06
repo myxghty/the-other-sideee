@@ -39,7 +39,7 @@ export default function Layout({ active, children }) {
         <div className="row" style={{ gap: 12 }}>
           <a className="brand" href="#/">
             <Logo />
-            <span className="brand-name">MedTrail</span>
+            <span className="brand-name">MedBridge</span>
           </a>
           <span className="pill-synthetic">SYNTHETIC DATA</span>
           <span className="badge tone-neutral small">{BACKEND_LABEL}</span>

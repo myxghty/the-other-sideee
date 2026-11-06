@@ -32,7 +32,7 @@ async def lifespan(app):
     db.close()
 
 
-app = FastAPI(title="MedTrail API", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="MedBridge API", version="0.1.0", lifespan=lifespan)
 app.add_exception_handler(ApiError, api_error_handler)
 
 # Order matters: CORS is outermost so even overload (429) responses carry CORS headers.

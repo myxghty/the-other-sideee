@@ -271,7 +271,7 @@ export default function Compare() {
       </div>
 
       <p className="notice notice-info" style={{ margin: 0 }}>
-        MedTrail highlights differences between records. It does not decide which instruction is correct: every flag is resolved by a qualified pharmacist or clinician.
+        MedBridge highlights differences between records. It does not decide which instruction is correct: every flag is resolved by a qualified pharmacist or clinician.
       </p>
     </>
   );
