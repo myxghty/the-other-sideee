@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BACKEND_LABEL, api } from '../api/endpoints';
 import { POLL } from '../config';
 import { Link, navigate } from '../lib/router';
@@ -16,10 +17,16 @@ const NAV = [
   { to: '/lab', label: 'Test lab', staff: true },
 ];
 
+const BRAND_BLUE = '#2563eb';
+const BRAND_WHITE = '#ffffff';
+const BOX = { background: BRAND_BLUE, padding: '0 4px', borderRadius: 4 };
+const NO_BOX = { background: 'transparent', padding: '0 4px', borderRadius: 4 };
+
 export default function Layout({ active, children }) {
   const user = useUser();
   const staff = isStaff(user);
   const load = useLoadLevel();
+  const [brandHover, setBrandHover] = useState(false);
   const queue = useQuery(staff ? 'tickets:active' : null, () => api.tickets({ status: 'active' }), {
     staleTime: 5000,
     refetchInterval: POLL.queue[load],
@@ -37,9 +44,19 @@ export default function Layout({ active, children }) {
     <>
       <header className="topbar">
         <div className="row" style={{ gap: 12 }}>
-          <a className="brand" href="#/">
+          <a
+            className="brand"
+            href="#/"
+            onMouseEnter={() => setBrandHover(true)}
+            onMouseLeave={() => setBrandHover(false)}
+            onFocus={() => setBrandHover(true)}
+            onBlur={() => setBrandHover(false)}
+          >
             <Logo />
-            <span className="brand-name">MedBridge</span>
+            <span className="brand-name">
+              <span style={{ color: brandHover ? BRAND_BLUE : BRAND_WHITE, ...(brandHover ? NO_BOX : BOX), transition: 'color 0.15s, background 0.15s' }}>Med</span>
+              <span style={{ color: brandHover ? BRAND_WHITE : BRAND_BLUE, ...(brandHover ? BOX : NO_BOX), transition: 'color 0.15s, background 0.15s' }}>Bridge</span>
+            </span>
           </a>
           <span className="pill-synthetic">SYNTHETIC DATA</span>
           <span className="badge tone-neutral small">{BACKEND_LABEL}</span>
